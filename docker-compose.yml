@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  nexus-hub:
+    build: .
+    container_name: nexus-hub
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: production
+      GEMINI_API_KEY: ${GEMINI_API_KEY}
+      APP_URL: ${APP_URL:-http://localhost:3000}
+    volumes:
+      - ./logs:/app/logs
+    restart: unless-stopped
+    networks:
+      - nexus-network
+    labels:
+      - "com.nexus.app=hub"
+      - "com.nexus.version=2.0.0"
+
+  # Optional: Redis for session management (future enhancement)
+  # redis:
+  #   image: redis:7-alpine
+  #   container_name: nexus-redis
+  #   ports:
+  #     - "6379:6379"
+  #   networks:
+  #     - nexus-network
+  #   restart: unless-stopped
+
+networks:
+  nexus-network:
+    driver: bridge

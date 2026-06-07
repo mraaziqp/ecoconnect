@@ -1,0 +1,6 @@
+{
+  "name": "Nexus Hub",
+  "description": "Centralized, cinematic dark-mode operating system, app registry, and Secondbrain orchestrator for a modern software ecosystem.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
