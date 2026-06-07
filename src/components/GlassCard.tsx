@@ -65,12 +65,27 @@ export const GlassCard: React.FC<GlassCardProps> = ({ app, onClick, featured = f
 
       <div>
         <div className="flex items-center justify-between mb-4">
-          <div className={`w-10 h-10 rounded-xl ${currentTheme.bg} flex items-center justify-center transition-colors duration-300`}>
+          <div className={`w-10 h-10 rounded-xl ${currentTheme.bg} flex items-center justify-center transition-colors duration-300 relative`}>
             <Icon name={app.logo} size={20} className={`${currentTheme.accent} transition-transform duration-300 group-hover:scale-110`} />
+            {app.status === "ACTIVE" && (
+              <div className="absolute -top-1 -right-1 w-3 h-3 bg-green-400 rounded-full animate-pulse" />
+            )}
           </div>
-          <span className={`text-[9px] px-2.5 py-0.5 rounded-full font-sans font-semibold tracking-wider uppercase border ${currentTheme.badge}`}>
-            {app.id === "secondbrain" ? "Neural Core" : app.status}
-          </span>
+          <div className="flex items-center gap-1.5">
+            {app.status === "ACTIVE" && (
+              <span className="text-[8px] text-green-400 font-bold tracking-widest uppercase flex items-center gap-1">
+                <span className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse"></span>
+                Live
+              </span>
+            )}
+            <span className={`text-[9px] px-2.5 py-0.5 rounded-full font-sans font-semibold tracking-wider uppercase border ${
+              app.status === "ACTIVE"
+                ? "bg-green-500/10 text-green-300 border-green-500/30"
+                : currentTheme.badge
+            }`}>
+              {app.id === "secondbrain" ? "Neural Core" : app.status}
+            </span>
+          </div>
         </div>
 
         <h3 className="text-sm font-semibold text-slate-100 font-display tracking-wide mb-1 leading-snug">
